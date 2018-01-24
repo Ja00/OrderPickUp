@@ -1,0 +1,43 @@
+<% include ./partials/header %>
+<h1>this is the show page</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div>
+                 <p>ingredients:</p>
+            </div>
+            <a class="btn btn-primary" href="/menu">Back to Menu</a>
+        </div>
+        <div class="col-md-9">
+            <div  style="overflow: hidden" class="thumbnail">
+                <img class="image-responsive" src="<%= item.image %>">
+                <div class="caption-full">
+                    <h4 class="pull-right">$<%= item.price %></h4>
+                    <h4><%= item.name %></h4>
+                    <p><em><%= item.description %></em></p>
+                    <p><em>(It takes <%= item.time %> min)</em></p>
+                </div>
+                <div style="float: right">
+                    <form action="/item/<%= item._id %>/add" method="POST">
+                        <input style="width:35px" type="number" name="number" value="1">
+                        <button class="btn btn-success">Order</button>
+                    </form>                    
+                </div>
+            </div>
+            <!--comment section-->
+            <div class="well">
+                        <% item.comments.forEach(function(comment) { %>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong><%= comment.author %></strong>
+                                    <p><%= comment.text %></p>
+                                </div>
+                            </div>
+                        <% }); %>
+            </div>
+        </div>
+    </div>
+    
+
+<% include ./partials/footer %>
